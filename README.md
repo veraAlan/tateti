@@ -10,7 +10,10 @@ Universidad Nacional del Comahue
 
 ## Integrantes del Grupo 21
 
-- **Vera Alan Cristian Gaston** - legajo 2622 - mail personal: alan_13_nqn@outlook.com - usuario github: veraAlan
+- **Vera Alan Cristian Gaston** 
+    - legajo 2622  
+    - mail personal: alan_13_nqn@outlook.com  
+    - usuario github: veraAlan  
 
 ## Profesores
 - **David Torchinsky**
