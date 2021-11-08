@@ -1,4 +1,6 @@
-![php-tutorial-pdf](https://user-images.githubusercontent.com/93886135/140830689-de706a21-3791-4ef2-83ef-f61640f1aad1.jpg)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/93886135/140830689-de706a21-3791-4ef2-83ef-f61640f1aad1.jpg" />
+</p>
 
 # Projecto de Tateti
 Desarrollaremos un juego de tateti en codigo PHP, para la materia de Introducción a la Programación (FAI)
