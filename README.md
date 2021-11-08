@@ -1,4 +1,4 @@
-![](https://postimg.cc/Th961YWG)
+![PHP](https://user-images.githubusercontent.com/93886135/140830161-e5ce22b0-91c5-4e90-a0e3-8d98269a9c6a.png)
 
 # Projecto de Tateti
 Desarrollaremos un juego de tateti en codigo PHP, para la materia de Introducción a la Programación (FAI)
