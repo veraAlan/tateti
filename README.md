@@ -20,3 +20,5 @@ Universidad Nacional del Comahue
 - **Maria Jose Rotter**
 - **Karina Rozas**
 - **Sandra Lucero**
+
+[![Meme](/assets/images/shiprock.jpg "Shiprock, New Mexico by Beau Rogers")](https://i.ytimg.com/vi/ivtk9cLN3mY/hqdefault.jpg)
