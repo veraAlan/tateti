@@ -5,12 +5,12 @@
 # Projecto de Tateti
 Desarrollaremos un juego de tateti en codigo PHP, para la materia de Introducción a la Programación (FAI)
 
-## Materia 2021
+## Cursada 2021
 
-Universidad Nacional del Comahue
-Facultad de Informatica (FAI)
-Tecnicatura Universitaria en Desarrollo Web
-Introducción a la Programación 
+Universidad Nacional del Comahue  
+Facultad de Informatica (FAI)  
+Tecnicatura Universitaria en Desarrollo Web  
+Introducción a la Programación   
 
 ## Integrantes del Grupo 21
 
