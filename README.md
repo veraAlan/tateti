@@ -3,10 +3,10 @@ Juego de tateti desarrollado en Introducción a la Programación (FAI)
 
 ## Materia 2021
 
-- Introducción a la Programación
-- Tecnicatura Universitaria en Desarrollo Web
-- Facultad de Informatica (FAI)
-- Universidad Nacional del Comahue
+Introducción a la Programación  
+Tecnicatura Universitaria en Desarrollo Web  
+Facultad de Informatica (FAI)  
+Universidad Nacional del Comahue  
 
 ## Integrantes del Grupo 21
 
