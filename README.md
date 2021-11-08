@@ -1,5 +1,5 @@
 # Projecto de Tateti
-Desarrollaremos un juego de tateti para la materia de Introducción a la Programación (FAI)
+Desarrollaremos un juego de tateti en codigo PHP, para la materia de Introducción a la Programación (FAI)
 
 ## Materia 2021
 
