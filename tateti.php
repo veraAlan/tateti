@@ -480,8 +480,12 @@ function seleccionarOpcion(){
 
     if ($seleccion == 1){
         echo "Jugar Tateti";
+        do {
         imprimirResultado(jugar());
-
+        echo "desea realizar otro juego? \n";
+        /** aca necesitamos guardar los datos del juego problema para resolver eso -Santi */
+        $masJuegos = trim(fgets(STDIN));
+    } while ($masJuegos == "si");
     }
     elseif ($seleccion == 2){
         echo "Mostrar un Juego";
