@@ -16,7 +16,7 @@ Introducción a la Programación
 
 - **Vera Alan Cristian Gaston** 
     - Legajo FAI - 2622  
-    - Mail Personal: alan_13_nqn@outlook.com  
+    - Mail Personal: cryssal220799@gmail.com 
     - Usuario GitHub: veraAlan  
 - **Acosta Demian Aaron**
     - Legajo FAI - 2592
