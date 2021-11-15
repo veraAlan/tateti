@@ -446,6 +446,17 @@ function cargarJuegos(){
 
 }
 
+function menu(){
+    echo " 
+    1) Jugar al tateti \n
+    2) Mostrar un juego \n
+    3) Mostrar el primer juego ganador \n
+    4) Mostrar porcentaje de Juegos ganados \n
+    5) Mostrar resumen de Jugador \n
+    6) Mostrar listado de juegos Ordenado por jugador O \n
+    7) salir " ;
+}
+
 /**
  * Comprueba si la opción elegida puede ejecutarse, sino pide de nuevo el dato.
  */
@@ -459,12 +470,37 @@ function opcionValida(){
 }
 
 /**
- * Mostrar menú por pantalla y devolver el número de la opción
+ * Mostrar opcion seleccionada y devolver el número de la opción
  */
 function seleccionarOpcion(){
-    echo "1) jugar \n2) ";
-    $opcion = opcionValida();
+    menu();
+    echo "elija una opcion";
+     $opcion = trim(fgets(STDIN));
+     $seleccion = opcionValida($opcion);
 
+    if ($seleccion == 1){
+        echo "Jugar Tateti";
+        imprimirResultado(jugar());
+
+    }
+    elseif ($seleccion == 2){
+        echo "Mostrar un Juego";
+    }
+    elseif ($seleccion == 3){
+        echo "Mostrar el primer juego ganador";
+    }
+    elseif ($seleccion == 4){
+        echo "Mostrar porcentaje de juego ganado";
+    }
+    elseif ($seleccion == 5){
+        echo "Mostrar resumen de jugador";
+    }
+    elseif ($seleccion == 6){
+        echo "Mostrar listado de jugador ordenado por jugador O";
+    }
+    else{
+
+    }
     return $opcion;
 }
 
