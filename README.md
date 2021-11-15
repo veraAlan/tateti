@@ -22,7 +22,10 @@ Introducción a la Programación
     - Legajo FAI - 2592
     - Mail Personal: acostademiann14@gmail.com
     - Usuario GitHub: acostaDemianAaron
-
+- **Yaitul Santiago Alejo**
+    - Legajo FAI - 2339
+    - Mail Personal: santiago.yaitul@gmail.com
+    - Usuario GitHub: SantiagoYaitul
 ## Profesores
 - **David Torchinsky**
 - **Maria Jose Rotter**
