@@ -454,12 +454,17 @@ function menu()
     7) salir \n";
 }
 
-function opcionValida()
+function opcionValida($opValida)
 {
+    $numeroValido = false;
+    $opEvaluar = $opValida;
     do {
-        echo "Elija una opción del 1 al 7: ";
-        $opValida = trim(fgets(STDIN));
-    } while ($opValida >= 8 || $opValida <= 0);
-    gettype($opValida);
-    return $opValida;
+        if ($opEvaluar < 8 && $opEvaluar > 0) {
+            $numeroValido = true;
+        } else {
+            echo "La opcion seleccionada no existe porfavor ingresar un valor dentro del rango 1-7 \n";
+            $opEvaluar = trim(fgets(STDIN));
+        }
+    } while ($numeroValido == false);
+    return $opEvaluar;
 }
