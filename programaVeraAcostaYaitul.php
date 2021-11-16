@@ -54,7 +54,7 @@ $i = 0;
 
 //Proceso:
 
-do{
+do {
     menu();
     echo "seleccione una opcion del menu \n";
     $opcion = trim(fgets(STDIN));
@@ -68,15 +68,29 @@ do{
             $juegos[$i] = jugar();
             imprimirResultado($juegos[$i]);
 
-            $i++; 
-        break;
+            $i++;
+            break;
 
         case 2:
-        
-        break;
-    }    
-        
-    } while ($opcion < 7 && $opcion >= 1);
+
+            break;
+        case 3:
+
+            break;
+        case 4:
+
+            break;
+        case 5:
+
+            break;
+        case 6:
+
+            break;
+        case 7:
+            echo "Gracias por jugar a Tres en Raya";
+            break;
+    }
+} while ($opcion < 7 && $opcion >= 1);
 
 
 
