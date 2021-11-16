@@ -22,6 +22,13 @@ include_once("tateti.php");
  *      Usuario GitHub: acostaDemianAaron
  */
 
+/**
+ * Yaitul Santiago Alejo
+ *      Legajo FAI - 2339
+ *      Mail Personal: santiago.yaitul@gmail.com
+ *      Usuario GitHub: SantiagoYaitul
+ */
+
 
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
