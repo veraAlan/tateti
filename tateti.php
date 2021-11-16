@@ -441,3 +441,25 @@ function jugar()
 
     return $juego;
 }
+
+function menu()
+{
+    echo " 
+    1) Jugar al tateti \n
+    2) Mostrar un juego \n
+    3) Mostrar el primer juego ganador \n
+    4) Mostrar porcentaje de Juegos ganados \n
+    5) Mostrar resumen de Jugador \n
+    6) Mostrar listado de juegos Ordenado por jugador O \n
+    7) salir \n";
+}
+
+function opcionValida()
+{
+    do {
+        echo "Elija una opción del 1 al 7: ";
+        $opValida = trim(fgets(STDIN));
+    } while ($opValida >= 8 || $opValida <= 0);
+    gettype($opValida);
+    return $opValida;
+}

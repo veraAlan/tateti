@@ -50,21 +50,18 @@ include_once("tateti.php");
 
 //Inicialización de variables:
 
+$i = 0;
 
 //Proceso:
-
-menu();
-
-$i = 0;
 
 do{
     menu();
     echo "seleccione una opcion del menu \n";
     $opcion = trim(fgets(STDIN));
 
-    //$seleccion = opcionValida($opcion);
+    $seleccion = opcionValida($opcion);
 
-    switch ($opcion) {
+    switch ($seleccion) {
 
         case 1:
             echo "Jugar al Tateti \n";
