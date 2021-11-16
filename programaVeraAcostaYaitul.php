@@ -53,7 +53,39 @@ include_once("tateti.php");
 
 //Proceso:
 
-$juego = jugar();
+menu();
+
+$i = 0;
+
+do{
+    menu();
+    echo "seleccione una opcion del menu \n";
+    $opcion = trim(fgets(STDIN));
+
+    //$seleccion = opcionValida($opcion);
+
+    switch ($opcion) {
+
+        case 1:
+            echo "Jugar al Tateti \n";
+            $juegos[$i] = jugar();
+            imprimirResultado($juegos[$i]);
+
+            $i++; 
+        break;
+
+        case 2:
+        
+        break;
+    }    
+        
+    } while ($opcion < 7 && $opcion >= 1);
+
+
+
+ 
+
+
 //print_r($juego);
 //imprimirResultado($juego);
 
