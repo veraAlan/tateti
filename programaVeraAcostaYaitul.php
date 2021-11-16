@@ -15,6 +15,12 @@ include_once("tateti.php");
  *      Usuario GitHub: veraAlan
  */
 
+/**
+ * Acosta Demian Aaron
+ *      Legajo FAI - 2592
+ *      Mail Personal: acostademiann14@gmail.com
+ *      Usuario GitHub: acostaDemianAaron
+ */
 
 
 /**************************************/
