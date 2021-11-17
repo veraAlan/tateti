@@ -224,7 +224,18 @@ function resumenJugador($datosJuegos){
 //Inicialización de variables:
 
 $i = 0;
-$juegos = null;
+$juegos = array(
+    array("jugadorCruz" => "Aaron", "jugadorCirculo" => "Mateo", "puntosCruz" => 6, "puntosCirculo" => 0),
+    array("jugadorCruz" => "Santi", "jugadorCirculo" => "Alan", "puntosCruz" => 1, "puntosCirculo" => 1),
+    array("jugadorCruz" => "Santi", "jugadorCirculo" => "Alan", "puntosCruz" => 5, "puntosCirculo" => 0),
+    array("jugadorCruz" => "Mateo", "jugadorCirculo" => "Aaron", "puntosCruz" => 6, "puntosCirculo" => 0),
+    array("jugadorCruz" => "Majo", "jugadorCirculo" => "David", "puntosCruz" => 0, "puntosCirculo" => 6),
+    array("jugadorCruz" => "Aaron", "jugadorCirculo" => "Mateo", "puntosCruz" => 3, "puntosCirculo" => 0),
+    array("jugadorCruz" => "Karina", "jugadorCirculo" => "Sandra", "puntosCruz" => 0, "puntosCirculo" => 6),
+    array("jugadorCruz" => "Josepe", "jugadorCirculo" => "Grillo", "puntosCruz" => 1, "puntosCirculo" => 1),
+    array("jugadorCruz" => "Cristian", "jugadorCirculo" => "Gaston", "puntosCruz" => 4, "puntosCirculo" => 0),
+    array("jugadorCruz" => "Pepe", "jugadorCirculo" => "Cristian", "puntosCruz" => 6, "puntosCirculo" => 0)
+);
 
 //Proceso:
 
@@ -280,9 +291,9 @@ do {
             }
             break;
         case 5:
-            echo "\n\t◢ ==========================================◣\n";
+            echo "\n\t◢ ===============================◣\n";
             echo "\t‖   Mostrar resumen de Jugador   ‖\n";
-            echo "\t◥ ==========================================◤\n\n";
+            echo "\t◥ ===============================◤\n\n";
 
             resumenJugador($juegos);
 
@@ -292,9 +303,9 @@ do {
             break;
         case 7:
             echo chr(27) . chr(91) . 'H' . chr(27) . chr(91) . 'J';
-            echo "\n◢ =================================◣";
-            echo "\n‖ Gracias por jugar a Tres en Raya ‖";
-            echo "\n◥ =================================◤\n";
+            echo "\n◢ ===========================◣";
+            echo "\n‖ Gracias por jugar a Tateti ‖";
+            echo "\n◥ ===========================◤\n";
             break;
     }
 } while ($seleccion != 7);
