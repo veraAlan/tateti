@@ -72,6 +72,7 @@ do {
             break;
 
         case 2:
+            echo "";
 
             break;
         case 3:
@@ -90,7 +91,7 @@ do {
             echo "Gracias por jugar a Tres en Raya";
             break;
     }
-} while ($opcion < 7 && $opcion >= 1);
+} while ($opcion > 7 );
 
 
 
