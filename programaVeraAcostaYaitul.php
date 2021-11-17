@@ -91,7 +91,7 @@ do {
             echo "Gracias por jugar a Tres en Raya";
             break;
     }
-} while ($opcion != 7);
+} while ($seleccion != 7);
 
 
 
