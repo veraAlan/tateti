@@ -104,6 +104,73 @@ function mostrarJuego($coleccion)
     } while ($bandera);
 }
 
+function buscarJugador($coleccionJuegos)
+{
+    echo "Ingrese el nombre el jugador deseado: ";
+    $jugador = trim(fgets(STDIN));
+    $jugador = strtoupper($jugador);
+
+
+    foreach ($coleccionJuegos as $dato => $valor) {
+        if ($jugador == strtoupper($valor["jugadorCruz"]) && $valor["puntosCruz"] > 1) {
+            echo "\n◿\n";
+            echo "‖ Jugador Tateti: " . array_search($valor, $coleccionJuegos) + 1 . " (Gano X)\n";
+            echo "‖ Jugador Cruz: " . $valor["jugadorCruz"] . " obtuvo " . $valor["puntosCruz"] . " puntos.\n";
+            echo "‖ Jugador Circulo: " . $valor["jugadorCirculo"] . " obtuvo " . $valor["puntosCirculo"] . " puntos.\n";
+            echo "◹\n";
+            break;
+        } elseif ($jugador == strtoupper($valor["jugadorCirculo"]) && $valor["puntosCirculo"] > 1) {
+            echo "\n◿\n";
+            echo "‖ Jugador Tateti: " . array_search($valor, $coleccionJuegos) + 1 . " (Gano O)\n";
+            echo "‖ Jugador Circulo: " . $valor["jugadorCirculo"] . " obtuvo " . $valor["puntosCirculo"] . " puntos.\n";
+            echo "‖ Jugador Cruz: " . $valor["jugadorCruz"] . " obtuvo " . $valor["puntosCruz"] . " puntos.\n";
+            echo "◹\n";
+            break;
+        } elseif (array_search($valor, $coleccionJuegos) + 1 == count($coleccionJuegos)) {
+            echo "El jugador ingresado " . $jugador . " no a ganado ningun juego.\n";
+        }
+    }
+}
+
+
+function porcentajeDeVictorias($recopilacionJuegos)
+{
+    $acumX = 0;
+    $acumV = 0;
+    $acumO = 0;
+
+    foreach ($recopilacionJuegos as $i => $info) {
+        if ($info["puntosCruz"] > 1) {
+            $acumX = $acumX + 1;
+        } elseif ($info["puntosCirculo"] > 1) {
+            $acumO = $acumO + 1;
+        }
+    }
+
+
+    echo "Eliga al JugadorCruz o al jugadorCirculo con 'X' o 'O'";
+    $simbolo = trim(fgets(STDIN));
+    $simbolo = strtoupper($simbolo);
+    do {
+
+        if ($simbolo == "X") {
+            $acumT = round((($acumX * 100) / ($acumX + $acumO)), 2);
+            echo "El jugadorCruz gano " . $acumT . " % de los juegos ganados";
+            break;
+        } elseif ($simbolo == "O") {
+            $acumT = round((($acumO * 100) / ($acumX + $acumO)), 2);
+            echo "El jugadorCirculo gano " . $acumT . " % de los juegos ganados";
+            break;
+        } else {
+            do {
+                echo "El caracter ingresado no es correcto. Ingrese 'X' o 'O': ";
+                $simbolo = trim(fgets(STDIN));
+                $simbolo = strtoupper($simbolo);
+            } while ($simbolo != "X" && $simbolo != "O");
+        }
+    } while (true);
+}
+
 
 
 
@@ -144,12 +211,12 @@ do {
             break;
 
         case 2:
-            if($juegos != null){
+            if ($juegos != null) {
                 echo "\n\t◢ ======================◣\n";
                 echo "\t‖   Mostrar un juego.   ‖\n";
                 echo "\t◥ ======================◤\n\n";
                 mostrarJuego($juegos);
-    
+
                 sleep(2.5);
             } else {
                 echo "\nOpción inválida: No se ha realizado ningún juego aún.\n";
@@ -157,10 +224,21 @@ do {
             }
             break;
         case 3:
-
+            echo "\n\t◢ =====================================◣\n";
+            echo "\t‖   Mostrar el primer juego ganador.   ‖\n";
+            echo "\t◥ =====================================◤\n\n";
+            buscarJugador($juegos);
             break;
         case 4:
 
+            echo "\n\t◢ ==========================================◣\n";
+            echo "\t‖   Mostrar porcentaje de Juegos ganados.   ‖\n";
+            echo "\t◥ ==========================================◤\n\n";
+            if (gettype($juegos) != "NULL") {
+                porcentajeDeVictorias($juegos);
+            } else {
+                echo "No existen partidad para mostrar el porcentaje.\n";
+            }
             break;
         case 5:
 
@@ -169,7 +247,7 @@ do {
 
             break;
         case 7:
-            echo chr(27).chr(91).'H'.chr(27).chr(91).'J'; 
+            echo chr(27) . chr(91) . 'H' . chr(27) . chr(91) . 'J';
             echo "\n◢ =================================◣";
             echo "\n‖ Gracias por jugar a Tres en Raya ‖";
             echo "\n◥ =================================◤\n";
