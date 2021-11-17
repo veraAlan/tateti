@@ -34,6 +34,32 @@ include_once("tateti.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+function menu()
+{
+    echo " 
+    1) Jugar al tateti \n
+    2) Mostrar un juego \n
+    3) Mostrar el primer juego ganador \n
+    4) Mostrar porcentaje de Juegos ganados \n
+    5) Mostrar resumen de Jugador \n
+    6) Mostrar listado de juegos Ordenado por jugador O \n
+    7) salir \n";
+}
+
+function opcionValida($opValida)
+{
+    $numeroValido = false;
+    $opEvaluar = $opValida;
+    do {
+        if ($opEvaluar < 8 && $opEvaluar > 0) {
+            $numeroValido = true;
+        } else {
+            echo "La opcion seleccionada no existe porfavor ingresar un valor dentro del rango 1-7 \n";
+            $opEvaluar = trim(fgets(STDIN));
+        }
+    } while ($numeroValido == false);
+    return $opEvaluar;
+}
 
 
 
