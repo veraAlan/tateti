@@ -171,7 +171,8 @@ function porcentajeDeVictorias($recopilacionJuegos)
     } while (true);
 }
 
-function resumenJugador($datosJuegos){
+function resumenJugador($datosJuegos)
+{
     $gano = 0;
     $puntos = 0;
     $empato = 0;
@@ -179,38 +180,57 @@ function resumenJugador($datosJuegos){
     echo "Ingrese el nombre del jugador el cual desee conocer su resumen de partidas \n";
     $nombre = trim(fgets(STDIN));
     $nombre = strtolower($nombre);
-    foreach ($datosJuegos as $posicion => $archivo){
-        if ($nombre == $archivo["jugadorCruz"]){
-            if ($archivo["puntosCruz"] > 1){
+    foreach ($datosJuegos as $posicion => $archivo) {
+        if ($nombre == $archivo["jugadorCruz"]) {
+            if ($archivo["puntosCruz"] > 1) {
                 $gano = $gano + 1;
                 $puntos = $puntos + $archivo["puntosCruz"];
-            } elseif($archivo["puntosCruz"] == 0){
+            } elseif ($archivo["puntosCruz"] == 0) {
                 $perdio = $perdio + 1;
-            } elseif ($archivo["puntosCruz"] == 1){
+            } elseif ($archivo["puntosCruz"] == 1) {
                 $empato = $empato + 1;
                 $puntos = $puntos + 1;
             }
-        } elseif ($nombre == $archivo ["jugadorCirculo"]){
-                if($archivo["puntosCirculo"] > 1) {
-                    $gano = $gano + 1;
-                    $puntos = $puntos + $archivo["puntosCirculo"];
-                }elseif ($archivo["puntosCirculo"] == 0){
-                    $perdio = $perdio + 1;
-                }elseif ($archivo["puntosCirculo"] == 1){
-                    $empato = $empato + 1;
-                    $puntos = $puntos + 1;
-                }
-            } else 
+        } elseif ($nombre == $archivo["jugadorCirculo"]) {
+            if ($archivo["puntosCirculo"] > 1) {
+                $gano = $gano + 1;
+                $puntos = $puntos + $archivo["puntosCirculo"];
+            } elseif ($archivo["puntosCirculo"] == 0) {
+                $perdio = $perdio + 1;
+            } elseif ($archivo["puntosCirculo"] == 1) {
+                $empato = $empato + 1;
+                $puntos = $puntos + 1;
+            }
+        } else
             echo " El nombre ingresado no se encuentra en alguna partida \n";
     }
 
     echo " 
     Jugador: " . $nombre .
-    " Ganò: " . $gano . " juegos " . 
-    " Perdio: " . $perdio . " juegos " .
-    " Empato: " . $empato . " Juegos " .
-    " Total de puntos acumulados " . $puntos . " Puntos";
+        " Ganò: " . $gano . " juegos " .
+        " Perdio: " . $perdio . " juegos " .
+        " Empato: " . $empato . " Juegos " .
+        " Total de puntos acumulados " . $puntos . " Puntos";
 }
+
+function comparador($arrayA, $arrayB)
+{
+    return strcmp($arrayA["jugadorCirculo"], $arrayB["jugadorCirculo"]);
+}
+
+function jugadoresOrdenados($coleccionJuegos)
+{
+    uasort($coleccionJuegos, "comparador");
+    foreach ($coleccionJuegos as $dato => $array) {
+        time_nanosleep(0, 200000000);
+
+        echo "◢ ===============================◣\n";
+        print_r($array);
+        echo "◥ ===============================◤\n";
+    }
+}
+
+
 
 
 
@@ -299,7 +319,11 @@ do {
 
             break;
         case 6:
-
+            echo "\n\t◢ =====================================================◣\n";
+            echo "\t‖   Mostrar listado de juegos Ordenado por jugador O   ‖\n";
+            echo "\t◥ =====================================================◤\n\n";
+            sleep(2);
+            jugadoresOrdenados($juegos);
             break;
         case 7:
             echo chr(27) . chr(91) . 'H' . chr(27) . chr(91) . 'J';
