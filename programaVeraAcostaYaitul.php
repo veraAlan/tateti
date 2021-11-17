@@ -36,14 +36,23 @@ include_once("tateti.php");
 
 function menu()
 {
-    echo " 
-    1) Jugar al tateti \n
-    2) Mostrar un juego \n
-    3) Mostrar el primer juego ganador \n
-    4) Mostrar porcentaje de Juegos ganados \n
-    5) Mostrar resumen de Jugador \n
-    6) Mostrar listado de juegos Ordenado por jugador O \n
-    7) salir \n";
+    echo "\t\t\n◢ ======================================================◣\n";
+    time_nanosleep(0, 125000000);
+    echo "‖1) Jugar al tateti\t\t\t\t\t‖\n";
+    time_nanosleep(0, 125000000);
+    echo "‖2) Mostrar un juego\t\t\t\t\t‖\n";
+    time_nanosleep(0, 125000000);
+    echo "‖3) Mostrar el primer juego ganador\t\t\t‖\n";
+    time_nanosleep(0, 125000000);
+    echo "‖4) Mostrar porcentaje de Juegos ganados\t\t‖\n";
+    time_nanosleep(0, 125000000);
+    echo "‖5) Mostrar resumen de Jugador\t\t\t\t‖\n";
+    time_nanosleep(0, 125000000);
+    echo "‖6) Mostrar listado de juegos Ordenado por jugador O\t‖\n";
+    time_nanosleep(0, 125000000);
+    echo "‖7) Salir\t\t\t\t\t\t‖\n";
+    time_nanosleep(0, 125000000);
+    echo "◥ ======================================================◤\n\n";
 }
 
 function opcionValida($opValida)
@@ -53,15 +62,47 @@ function opcionValida($opValida)
     do {
         if ($opEvaluar < 8 && $opEvaluar > 0) {
             $numeroValido = true;
+            sleep(1);
         } else {
-            echo "La opcion seleccionada no existe porfavor ingresar un valor dentro del rango 1-7 \n";
+            echo "La opcion seleccionada no existe porfavor ingresar un valor dentro del rango 1-7\n";
             $opEvaluar = trim(fgets(STDIN));
         }
     } while ($numeroValido == false);
     return $opEvaluar;
 }
 
+function mostrarJuego($coleccion)
+{
+    $bandera = true;
+    do {
+        echo "Que numero de juego quiere ver: ";
+        $numeroJuego = trim(fgets(STDIN));
+        if ($numeroJuego > 0 && $numeroJuego <= count($coleccion)) {
+            $puntosX = $coleccion[$numeroJuego - 1]["puntosCruz"];
+            $puntosO = $coleccion[$numeroJuego - 1]["puntosCirculo"];
+            $nombreX = $coleccion[$numeroJuego - 1]["jugadorCruz"];
+            $nombreO = $coleccion[$numeroJuego - 1]["jugadorCirculo"];
 
+            echo "\n◿\n";
+            echo "‖ Juego TATETI: " . $numeroJuego . " ";
+            if ($puntosX > $puntosO) {
+                echo "(gano X)\n";
+            } elseif ($puntosX < $puntosO) {
+                echo "(gano O)\n";
+            } else {
+                echo "(empate)\n";
+            }
+
+            echo "‖ Jugador Cruz: " . $nombreX . " obtuvo " . $puntosX . " puntos.\n";
+            echo "‖ Jugador Circulo: " . $nombreO . " obtuvo " . $puntosO . " puntos.\n";
+            echo "◹\n";
+            $bandera = false;
+        } else {
+            echo "No es un número de juego válido.\n";
+            $bandera = true;
+        }
+    } while ($bandera);
+}
 
 
 
@@ -77,12 +118,13 @@ function opcionValida($opValida)
 //Inicialización de variables:
 
 $i = 0;
+$juegos = null;
 
 //Proceso:
 
 do {
     menu();
-    echo "seleccione una opcion del menu \n";
+    echo "Seleccione una opcion del menu: ";
     $opcion = trim(fgets(STDIN));
 
     $seleccion = opcionValida($opcion);
@@ -90,16 +132,29 @@ do {
     switch ($seleccion) {
 
         case 1:
-            echo "Jugar al Tateti \n";
+            echo "\n\n\t◢=================◣\n";
+            echo "\t‖ Jugar al Tateti ‖\n";
+            echo "\t◥=================◤\n\n";
+            sleep(1);
             $juegos[$i] = jugar();
             imprimirResultado($juegos[$i]);
 
             $i++;
+            sleep(2.5);
             break;
 
         case 2:
-            echo "";
-
+            if($juegos != null){
+                echo "\n\t◢ ======================◣\n";
+                echo "\t‖   Mostrar un juego.   ‖\n";
+                echo "\t◥ ======================◤\n\n";
+                mostrarJuego($juegos);
+    
+                sleep(2.5);
+            } else {
+                echo "\nOpción inválida: No se ha realizado ningún juego aún.\n";
+                sleep(2.5);
+            }
             break;
         case 3:
 
@@ -114,7 +169,10 @@ do {
 
             break;
         case 7:
-            echo "Gracias por jugar a Tres en Raya";
+            echo chr(27).chr(91).'H'.chr(27).chr(91).'J'; 
+            echo "\n◢ =================================◣";
+            echo "\n‖ Gracias por jugar a Tres en Raya ‖";
+            echo "\n◥ =================================◤\n";
             break;
     }
 } while ($seleccion != 7);
@@ -123,6 +181,7 @@ do {
 
  
 
+//TODO Se puede borrar todo esto que esta abajo? Digo, sólo para no molestar con comentarios innecesarios.
 
 //print_r($juego);
 //imprimirResultado($juego);
