@@ -9,24 +9,24 @@ include_once("tateti.php");
 /* ... COMPLETAR ... */
 
 /**
- * Vera ALAN Cristian Gaston
+ * Vera Alan Cristian Gaston
  *      Legajo FAI - 2622
  *      Mail: cryssal220799@gmail.com
- *      Usuario GitHub: veraALAN
+ *      Usuario GitHub: veraAlan
  */
 
 /**
- * Acosta Demian AARON
+ * Acosta Demian Aaron
  *      Legajo FAI - 2592
  *      Mail Personal: acostademiann14@gmail.com
- *      Usuario GitHub: acostaDemianAARON
+ *      Usuario GitHub: acostaDemianAaron
  */
 
 /**
- * Yaitul SANTIago Alejo
+ * Yaitul Santiago Alejo
  *      Legajo FAI - 2339
- *      Mail Personal: SANTIago.yaitul@gmail.com
- *      Usuario GitHub: SANTIagoYaitul
+ *      Mail Personal: santiago.yaitul@gmail.com
+ *      Usuario GitHub: SantiagoYaitul
  */
 
 /**************************************/
