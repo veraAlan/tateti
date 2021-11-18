@@ -34,6 +34,9 @@ include_once("tateti.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+/**
+ * Función que muestra por pantalla el menu y no tiene retorno.
+ */
 function menu()
 {
     echo "\t\t\n◢ ======================================================◣\n";
@@ -55,6 +58,12 @@ function menu()
     echo "◥ ======================================================◤\n\n";
 }
 
+/**
+ * Comprueba si la opción elegida esta dentro de las opciones válidas del menú.
+ * @param int $opValida;
+ * @param bool $numeroValido;
+ * @return int $opEvaluar;
+ */
 function opcionValida($opValida)
 {
     $numeroValido = false;
@@ -71,17 +80,22 @@ function opcionValida($opValida)
     return $opEvaluar;
 }
 
-function mostrarJuego($coleccion)
+/**
+ * Pregunta al usuario que número de juego (index) esta buscando y muestra ese juego por pantalla.
+ * Si el juego no existe muestra un cartel de error acorde.
+ * @param array $coleccionJuegos;
+ */
+function mostrarJuego($coleccionJuegos)
 {
     $bandera = true;
     do {
         echo "Que numero de juego quiere ver: ";
         $numeroJuego = trim(fgets(STDIN));
-        if ($numeroJuego > 0 && $numeroJuego <= count($coleccion)) {
-            $puntosX = $coleccion[$numeroJuego - 1]["puntosCruz"];
-            $puntosO = $coleccion[$numeroJuego - 1]["puntosCirculo"];
-            $nombreX = $coleccion[$numeroJuego - 1]["jugadorCruz"];
-            $nombreO = $coleccion[$numeroJuego - 1]["jugadorCirculo"];
+        if ($numeroJuego > 0 && $numeroJuego <= count($coleccionJuegos)) {
+            $puntosX = $coleccionJuegos[$numeroJuego - 1]["puntosCruz"];
+            $puntosO = $coleccionJuegos[$numeroJuego - 1]["puntosCirculo"];
+            $nombreX = $coleccionJuegos[$numeroJuego - 1]["jugadorCruz"];
+            $nombreO = $coleccionJuegos[$numeroJuego - 1]["jugadorCirculo"];
 
             echo "\n◿\n";
             echo "‖ Juego TATETI: " . $numeroJuego . " ";
@@ -104,12 +118,16 @@ function mostrarJuego($coleccion)
     } while ($bandera);
 }
 
+/**
+ * Pregunta al usuario a qué jugador esta buscando. En la primera partida de juego que encuentra el nombre del jugador, 
+ * lo muestra por pantalla y termina de ejecutarse.
+ * @param array $coleccionJuegos;
+ */
 function buscarJugador($coleccionJuegos)
 {
     echo "Ingrese el nombre el jugador deseado: ";
     $jugador = trim(fgets(STDIN));
     $jugador = strtoupper($jugador);
-
 
     foreach ($coleccionJuegos as $dato => $valor) {
         if ($jugador == strtoupper($valor["jugadorCruz"]) && $valor["puntosCruz"] > 1) {
@@ -132,14 +150,17 @@ function buscarJugador($coleccionJuegos)
     }
 }
 
-
-function porcentajeDeVictorias($recopilacionJuegos)
+/**
+ * Recompila la información dada en todos los juegos y le pide al usuario cual jugador (X o O) quiere conseguir información.
+ * Encuentra los datos del jugador y muestra por pantalla el porcentaje de victorias de tal jugador.
+ * @param array $colecciónJuegos
+ */
+function porcentajeDeVictorias($coleccionJuegos)
 {
     $acumX = 0;
-    $acumV = 0;
     $acumO = 0;
 
-    foreach ($recopilacionJuegos as $i => $info) {
+    foreach ($coleccionJuegos as $i => $info) {
         if ($info["puntosCruz"] > 1) {
             $acumX = $acumX + 1;
         } elseif ($info["puntosCirculo"] > 1) {
@@ -171,57 +192,78 @@ function porcentajeDeVictorias($recopilacionJuegos)
     } while (true);
 }
 
-function resumenJugador($datosJuegos)
+/**
+ * Da un resumen solicitado por el usuario.
+ * Muestra cantidad de partidas ganadas, perdidas, empatadas y puntos.
+ * @param array $colecionJuegos;
+ */
+function resumenJugador($coleccionJuegos)
 {
     $gano = 0;
     $puntos = 0;
     $empato = 0;
     $perdio = 0;
+
     echo "Ingrese el nombre del jugador el cual desee conocer su resumen de partidas \n";
     $nombre = trim(fgets(STDIN));
     $nombre = strtolower($nombre);
-    foreach ($datosJuegos as $posicion => $archivo) {
-        if ($nombre == $archivo["jugadorCruz"]) {
-            if ($archivo["puntosCruz"] > 1) {
+    
+    foreach ($coleccionJuegos as &$partida) {
+        if ($nombre == strtolower($partida["jugadorCruz"])) {
+            if ($partida["puntosCruz"] > 1) {
                 $gano = $gano + 1;
-                $puntos = $puntos + $archivo["puntosCruz"];
-            } elseif ($archivo["puntosCruz"] == 0) {
+                $puntos = $puntos + $partida["puntosCruz"];
+            } elseif ($partida["puntosCruz"] == 0) {
                 $perdio = $perdio + 1;
-            } elseif ($archivo["puntosCruz"] == 1) {
+            } elseif ($partida["puntosCruz"] == 1) {
                 $empato = $empato + 1;
                 $puntos = $puntos + 1;
             }
-        } elseif ($nombre == $archivo["jugadorCirculo"]) {
-            if ($archivo["puntosCirculo"] > 1) {
+        } elseif ($nombre == strtolower($partida["jugadorCirculo"])) {
+            if ($partida["puntosCirculo"] > 1) {
                 $gano = $gano + 1;
-                $puntos = $puntos + $archivo["puntosCirculo"];
-            } elseif ($archivo["puntosCirculo"] == 0) {
+                $puntos = $puntos + $partida["puntosCirculo"];
+            } elseif ($partida["puntosCirculo"] == 0) {
                 $perdio = $perdio + 1;
-            } elseif ($archivo["puntosCirculo"] == 1) {
+            } elseif ($partida["puntosCirculo"] == 1) {
                 $empato = $empato + 1;
                 $puntos = $puntos + 1;
             }
-        } else
-            echo " El nombre ingresado no se encuentra en alguna partida \n";
+        } elseif (count($coleccionJuegos) == (array_search($partida, $coleccionJuegos)+1)){
+            if($puntos > 0 && $perdio > 0){
+                echo "\n◿\n‖ Jugador: " . strtoupper($nombre) .
+                "\n‖ Ganó: " . $gano . " juegos." .
+                "\n‖ Perdio: " . $perdio . " juegos." .
+                "\n‖ Empato: " . $empato . " Juegos." .
+                "\n‖ Total de puntos acumulados " . $puntos . " Puntos.\n◹\n";
+            } else {
+                echo "El nombre ingresado no se encuentra en alguna partida \n";
+            }
+        }
     }
-
-    echo " 
-    Jugador: " . $nombre .
-        " Ganò: " . $gano . " juegos " .
-        " Perdio: " . $perdio . " juegos " .
-        " Empato: " . $empato . " Juegos " .
-        " Total de puntos acumulados " . $puntos . " Puntos";
 }
 
+/**
+ * Comparador de los nombres dentro de dos arrays.
+ * Devuelve 1 si el primer string es menor lexicograficamente al segundo.
+ * Devuelve 0 si ambos strings son iguales.
+ * Devuelve -1 si el primer string es mayor al segundo.
+ * @param array $arrayA, $arrayB;
+ * @return int;
+ */
 function comparador($arrayA, $arrayB)
 {
     return strcmp($arrayA["jugadorCirculo"], $arrayB["jugadorCirculo"]);
 }
 
+/**
+ * Ordena la colección de juegos alfabéticamente según el nombre del jugador O en cada partida jugada.
+ * @param array $coleccionJuegos;
+ */
 function jugadoresOrdenados($coleccionJuegos)
 {
     uasort($coleccionJuegos, "comparador");
-    foreach ($coleccionJuegos as $dato => $array) {
+    foreach ($coleccionJuegos as &$array) {
         time_nanosleep(0, 200000000);
 
         echo "◢ ===============================◣\n";
@@ -240,6 +282,11 @@ function jugadoresOrdenados($coleccionJuegos)
 
 //Declaración de variables:
 
+/**
+ * int $i;
+ * array $juegos;
+ * string $opcion, $seleccion;
+ */
 
 //Inicialización de variables:
 
@@ -266,6 +313,7 @@ do {
 
     $seleccion = opcionValida($opcion);
 
+    //Uso de switch para seleccionar opción de menu.
     switch ($seleccion) {
 
         case 1:
@@ -275,48 +323,37 @@ do {
             sleep(1);
             $juegos[$i] = jugar();
             imprimirResultado($juegos[$i]);
-
             $i++;
-            sleep(2.5);
+            sleep(2);
             break;
-
         case 2:
-            if ($juegos != null) {
-                echo "\n\t◢ ======================◣\n";
-                echo "\t‖   Mostrar un juego.   ‖\n";
-                echo "\t◥ ======================◤\n\n";
-                mostrarJuego($juegos);
-
-                sleep(2.5);
-            } else {
-                echo "\nOpción inválida: No se ha realizado ningún juego aún.\n";
-                sleep(2.5);
-            }
+            echo "\n\t◢ ======================◣\n";
+            echo "\t‖   Mostrar un juego.   ‖\n";
+            echo "\t◥ ======================◤\n\n";
+            sleep(2);
+            mostrarJuego($juegos);
+            sleep(2);
             break;
         case 3:
             echo "\n\t◢ =====================================◣\n";
             echo "\t‖   Mostrar el primer juego ganador.   ‖\n";
             echo "\t◥ =====================================◤\n\n";
+            sleep(2);
             buscarJugador($juegos);
             break;
         case 4:
-
             echo "\n\t◢ ==========================================◣\n";
             echo "\t‖   Mostrar porcentaje de Juegos ganados.   ‖\n";
             echo "\t◥ ==========================================◤\n\n";
-            if (gettype($juegos) != "NULL") {
-                porcentajeDeVictorias($juegos);
-            } else {
-                echo "No existen partidad para mostrar el porcentaje.\n";
-            }
+            sleep(2);
+            porcentajeDeVictorias($juegos);
             break;
         case 5:
             echo "\n\t◢ ===============================◣\n";
             echo "\t‖   Mostrar resumen de Jugador   ‖\n";
             echo "\t◥ ===============================◤\n\n";
-
+            sleep(2);
             resumenJugador($juegos);
-
             break;
         case 6:
             echo "\n\t◢ =====================================================◣\n";
@@ -333,38 +370,3 @@ do {
             break;
     }
 } while ($seleccion != 7);
-
-
-
- 
-
-//TODO Se puede borrar todo esto que esta abajo? Digo, sólo para no molestar con comentarios innecesarios.
-
-//print_r($juego);
-//imprimirResultado($juego);
-
-
-
-/*
-do {
-    $opcion = ...;
-
-    
-    switch ($opcion) {
-        case 1: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
-
-            break;
-        case 2: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
-
-            break;
-        case 3: 
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
-            break;
-        
-            //...
-    }
-} while ($opcion != X);
-*/
