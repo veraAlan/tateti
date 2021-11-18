@@ -9,26 +9,25 @@ include_once("tateti.php");
 /* ... COMPLETAR ... */
 
 /**
- * Vera Alan Cristian Gaston
+ * Vera ALAN Cristian Gaston
  *      Legajo FAI - 2622
  *      Mail: cryssal220799@gmail.com
- *      Usuario GitHub: veraAlan
+ *      Usuario GitHub: veraALAN
  */
 
 /**
- * Acosta Demian Aaron
+ * Acosta Demian AARON
  *      Legajo FAI - 2592
  *      Mail Personal: acostademiann14@gmail.com
- *      Usuario GitHub: acostaDemianAaron
+ *      Usuario GitHub: acostaDemianAARON
  */
 
 /**
- * Yaitul Santiago Alejo
+ * Yaitul SANTIago Alejo
  *      Legajo FAI - 2339
- *      Mail Personal: santiago.yaitul@gmail.com
- *      Usuario GitHub: SantiagoYaitul
+ *      Mail Personal: SANTIago.yaitul@gmail.com
+ *      Usuario GitHub: SANTIagoYaitul
  */
-
 
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
@@ -130,14 +129,14 @@ function buscarJugador($coleccionJuegos)
     $jugador = strtoupper($jugador);
 
     foreach ($coleccionJuegos as $dato => $valor) {
-        if ($jugador == strtoupper($valor["jugadorCruz"]) && $valor["puntosCruz"] > 1) {
+        if ($jugador == $valor["jugadorCruz"] && $valor["puntosCruz"] > 1) {
             echo "\n◿\n";
             echo "‖ Jugador Tateti: " . array_search($valor, $coleccionJuegos) + 1 . " (Gano X)\n";
             echo "‖ Jugador Cruz: " . $valor["jugadorCruz"] . " obtuvo " . $valor["puntosCruz"] . " puntos.\n";
             echo "‖ Jugador Circulo: " . $valor["jugadorCirculo"] . " obtuvo " . $valor["puntosCirculo"] . " puntos.\n";
             echo "◹\n";
             break;
-        } elseif ($jugador == strtoupper($valor["jugadorCirculo"]) && $valor["puntosCirculo"] > 1) {
+        } elseif ($jugador == $valor["jugadorCirculo"] && $valor["puntosCirculo"] > 1) {
             echo "\n◿\n";
             echo "‖ Jugador Tateti: " . array_search($valor, $coleccionJuegos) + 1 . " (Gano O)\n";
             echo "‖ Jugador Circulo: " . $valor["jugadorCirculo"] . " obtuvo " . $valor["puntosCirculo"] . " puntos.\n";
@@ -168,23 +167,25 @@ function porcentajeDeVictorias($coleccionJuegos)
         }
     }
 
-
-    echo "Eliga al JugadorCruz o al jugadorCirculo con 'X' o 'O'";
+    echo "Eliga al JugadorCruz o al jugadorCirculo con 'X' o 'O': ";
     $simbolo = trim(fgets(STDIN));
     $simbolo = strtoupper($simbolo);
     do {
-
         if ($simbolo == "X") {
             $acumT = round((($acumX * 100) / ($acumX + $acumO)), 2);
-            echo "El jugadorCruz gano " . $acumT . " % de los juegos ganados";
+            echo "\n◿";
+            echo "\n‖ El lado cruz obtuvo " . $acumT . "% de victorias.";
+            echo "\n◹\n";
             break;
         } elseif ($simbolo == "O") {
             $acumT = round((($acumO * 100) / ($acumX + $acumO)), 2);
-            echo "El jugadorCirculo gano " . $acumT . " % de los juegos ganados";
+            echo "\n◿";
+            echo "\n‖ El lado circulo obtuvo " . $acumT . "% de victorias.";
+            echo "\n◹\n";
             break;
         } else {
             do {
-                echo "El caracter ingresado no es correcto. Ingrese 'X' o 'O': ";
+                echo "\nEl caracter ingresado no es correcto. Ingrese 'X' o 'O': ";
                 $simbolo = trim(fgets(STDIN));
                 $simbolo = strtoupper($simbolo);
             } while ($simbolo != "X" && $simbolo != "O");
@@ -206,10 +207,10 @@ function resumenJugador($coleccionJuegos)
 
     echo "Ingrese el nombre del jugador el cual desee conocer su resumen de partidas \n";
     $nombre = trim(fgets(STDIN));
-    $nombre = strtolower($nombre);
+    $nombre = strtoupper($nombre);
     
     foreach ($coleccionJuegos as &$partida) {
-        if ($nombre == strtolower($partida["jugadorCruz"])) {
+        if ($nombre == $partida["jugadorCruz"]) {
             if ($partida["puntosCruz"] > 1) {
                 $gano = $gano + 1;
                 $puntos = $puntos + $partida["puntosCruz"];
@@ -219,7 +220,7 @@ function resumenJugador($coleccionJuegos)
                 $empato = $empato + 1;
                 $puntos = $puntos + 1;
             }
-        } elseif ($nombre == strtolower($partida["jugadorCirculo"])) {
+        } elseif ($nombre == $partida["jugadorCirculo"]) {
             if ($partida["puntosCirculo"] > 1) {
                 $gano = $gano + 1;
                 $puntos = $puntos + $partida["puntosCirculo"];
@@ -292,16 +293,16 @@ function jugadoresOrdenados($coleccionJuegos)
 
 $i = 0;
 $juegos = array(
-    array("jugadorCruz" => "Aaron", "jugadorCirculo" => "Mateo", "puntosCruz" => 6, "puntosCirculo" => 0),
-    array("jugadorCruz" => "Santi", "jugadorCirculo" => "Alan", "puntosCruz" => 1, "puntosCirculo" => 1),
-    array("jugadorCruz" => "Santi", "jugadorCirculo" => "Alan", "puntosCruz" => 5, "puntosCirculo" => 0),
-    array("jugadorCruz" => "Mateo", "jugadorCirculo" => "Aaron", "puntosCruz" => 6, "puntosCirculo" => 0),
-    array("jugadorCruz" => "Majo", "jugadorCirculo" => "David", "puntosCruz" => 0, "puntosCirculo" => 6),
-    array("jugadorCruz" => "Aaron", "jugadorCirculo" => "Mateo", "puntosCruz" => 3, "puntosCirculo" => 0),
-    array("jugadorCruz" => "Karina", "jugadorCirculo" => "Sandra", "puntosCruz" => 0, "puntosCirculo" => 6),
-    array("jugadorCruz" => "Josepe", "jugadorCirculo" => "Grillo", "puntosCruz" => 1, "puntosCirculo" => 1),
-    array("jugadorCruz" => "Cristian", "jugadorCirculo" => "Gaston", "puntosCruz" => 4, "puntosCirculo" => 0),
-    array("jugadorCruz" => "Pepe", "jugadorCirculo" => "Cristian", "puntosCruz" => 6, "puntosCirculo" => 0)
+    array("jugadorCruz" => "AARON", "jugadorCirculo" => "MATEO", "puntosCruz" => 6, "puntosCirculo" => 0),
+    array("jugadorCruz" => "SANTI", "jugadorCirculo" => "ALAN", "puntosCruz" => 1, "puntosCirculo" => 1),
+    array("jugadorCruz" => "SANTI", "jugadorCirculo" => "ALAN", "puntosCruz" => 5, "puntosCirculo" => 0),
+    array("jugadorCruz" => "MATEO", "jugadorCirculo" => "AARON", "puntosCruz" => 6, "puntosCirculo" => 0),
+    array("jugadorCruz" => "MAJO", "jugadorCirculo" => "DAVID", "puntosCruz" => 0, "puntosCirculo" => 6),
+    array("jugadorCruz" => "AARON", "jugadorCirculo" => "MATEO", "puntosCruz" => 3, "puntosCirculo" => 0),
+    array("jugadorCruz" => "KARINA", "jugadorCirculo" => "SANDRA", "puntosCruz" => 0, "puntosCirculo" => 6),
+    array("jugadorCruz" => "JOSEPE", "jugadorCirculo" => "GRILLO", "puntosCruz" => 1, "puntosCirculo" => 1),
+    array("jugadorCruz" => "CRISTIAN", "jugadorCirculo" => "GASTON", "puntosCruz" => 4, "puntosCirculo" => 0),
+    array("jugadorCruz" => "PEPE", "jugadorCirculo" => "CRISTIAN", "puntosCruz" => 6, "puntosCirculo" => 0)
 );
 
 //Proceso:
