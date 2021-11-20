@@ -5,9 +5,6 @@ include_once("tateti.php");
 /***** DATOS DE LOS INTEGRANTES *******/
 /**************************************/
 
-/* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
-/* ... COMPLETAR ... */
-
 /**
  * Vera Alan Cristian Gaston
  *      Legajo FAI - 2622
@@ -197,52 +194,58 @@ function porcentajeDeVictorias($coleccionJuegos)
 }
 
 /**
- * Da un resumen solicitado por el usuario.
+ * Muestra por pantalla un resumen solicitado por el usuario.
  * Muestra cantidad de partidas ganadas, perdidas, empatadas y puntos.
  * @param array $colecionJuegos;
  */
 function resumenJugador($coleccionJuegos)
 {
-    //int $gano, $puntos, $empato, $perdio, string $nombre, array $partida
-    $gano = 0;
-    $puntos = 0;
-    $empato = 0;
-    $perdio = 0;
+    //string $nombre, array $datosJugador, boolean $jugadorEncontrado;
+    $jugadorEncontrado = false;
 
-    echo "Ingrese el nombre del jugador el cual desee conocer su resumen de partidas \n";
+    echo "Ingrese el nombre del jugador el cual desee conocer su resumen de partidas: ";
     $nombre = trim(fgets(STDIN));
     $nombre = strtoupper($nombre);
-    
+    $datosJugador = ["nombre" => $nombre, "juegosGanados" => 0, "juegosPerdidos" => 0, "juegosEmpatados" => 0, "puntosAcumulados" => 0];
+
     foreach ($coleccionJuegos as &$partida) {
         if ($nombre == $partida["jugadorCruz"]) {
-            if ($partida["puntosCruz"] > 1) {
-                $gano = $gano + 1;
-                $puntos = $puntos + $partida["puntosCruz"];
-            } elseif ($partida["puntosCruz"] == 0) {
-                $perdio = $perdio + 1;
-            } elseif ($partida["puntosCruz"] == 1) {
-                $empato = $empato + 1;
-                $puntos = $puntos + 1;
-            }
-        } elseif ($nombre == $partida["jugadorCirculo"]) {
-            if ($partida["puntosCirculo"] > 1) {
-                $gano = $gano + 1;
-                $puntos = $puntos + $partida["puntosCirculo"];
-            } elseif ($partida["puntosCirculo"] == 0) {
-                $perdio = $perdio + 1;
-            } elseif ($partida["puntosCirculo"] == 1) {
-                $empato = $empato + 1;
-                $puntos = $puntos + 1;
-            }
-        } elseif (count($coleccionJuegos) == (array_search($partida, $coleccionJuegos)+1)){
-            if($puntos > 0 && $perdio > 0){
-                echo "\n◿\n‖ Jugador: " . strtoupper($nombre) .
-                "\n‖ Ganó: " . $gano . " juegos." .
-                "\n‖ Perdio: " . $perdio . " juegos." .
-                "\n‖ Empato: " . $empato . " Juegos." .
-                "\n‖ Total de puntos acumulados " . $puntos . " Puntos.\n◹\n";
+            echo "\nJugador encontrado.";
+            if ($partida["puntosCruz"] == 1) {
+                $datosJugador["juegosEmpatados"]++;
+                $datosJugador["puntosAcumulados"]++;
             } else {
-                echo "El nombre ingresado no se encuentra en alguna partida \n";
+                if ($partida["puntosCruz"] > 1) {
+                    $datosJugador["juegosGanados"]++;
+                    $datosJugador["puntosAcumulados"] += $partida["puntosCruz"];
+                } else {
+                    $datosJugador["juegosPerdidos"]++;
+                }
+            }
+            $jugadorEncontrado = true;
+        } elseif ($nombre == $partida["jugadorCirculo"]) {
+            echo "\nJugador encontrado.";
+            if ($partida["puntosCirculo"] == 1) {
+                $datosJugador["juegosEmpatados"]++;
+                $datosJugador["puntosAcumulados"]++;
+            } else {
+                if ($partida["puntosCirculo"] > 1) {
+                    $datosJugador["juegosGanados"]++;
+                    $datosJugador["puntosAcumulados"] += $partida["puntosCirculo"];
+                } else {
+                    $datosJugador["juegosPerdidos"]++;
+                }
+            }
+            $jugadorEncontrado = true;
+        } elseif (count($coleccionJuegos) == (array_search($partida, $coleccionJuegos) + 1)) {
+            if ($jugadorEncontrado) {
+                echo "\n◿\n‖ Jugador: " . strtoupper($datosJugador["nombre"]) .
+                    "\n‖ Ganó: " . $datosJugador["juegosGanados"] . " juegos." .
+                    "\n‖ Perdio: " . $datosJugador["juegosPerdidos"] . " juegos." .
+                    "\n‖ Empato: " . $datosJugador["juegosEmpatados"] . " Juegos." .
+                    "\n‖ Total de puntos acumulados " . $datosJugador["puntosAcumulados"] . " Puntos.\n◹\n";
+            } else {
+                echo "\nEl nombre ingresado no se encuentra en alguna partida.\n";
             }
         }
     }
@@ -278,10 +281,6 @@ function jugadoresOrdenados($coleccionJuegos)
     }
 }
 
-
-
-
-
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -297,7 +296,7 @@ function jugadoresOrdenados($coleccionJuegos)
 //Inicialización de variables:
 
 $i = 0;
-$juegos = 
+$juegos =
     [
         ["jugadorCruz" => "AARON", "jugadorCirculo" => "MATEO", "puntosCruz" => 6, "puntosCirculo" => 0],
         ["jugadorCruz" => "SANTI", "jugadorCirculo" => "ALAN", "puntosCruz" => 1, "puntosCirculo" => 1],
@@ -313,16 +312,13 @@ $juegos =
 
 //Proceso:
 
+//DO WHILE para seguir ejecutando el programa mientras no se elija la opción 7.
 do {
     menu();
     echo "Seleccione una opcion del menu: ";
     $opcion = trim(fgets(STDIN));
-
-    $seleccion = opcionValida($opcion);
-
-    //Uso de switch para seleccionar opción de menu.
-    switch ($seleccion) {
-
+    //Uso de switch para llamar al módulo adecuado en las opciones 1 a 6, mostrar un cartel de despedida en la opción 7 y mostrar un error is no es ningún caso.
+    switch ($opcion) {
         case 1:
             echo "\n\n\t◢=================◣\n";
             echo "\t‖ Jugar al Tateti ‖\n";
@@ -375,5 +371,8 @@ do {
             echo "\n‖ Gracias por jugar a Tateti ‖";
             echo "\n◥ ===========================◤\n";
             break;
+        default:
+            echo "La opcion seleccionada no existe porfavor ingresar un partida dentro del rango 1-7\n";
+            break;
     }
-} while ($seleccion != 7);
+} while ($opcion != 7);
