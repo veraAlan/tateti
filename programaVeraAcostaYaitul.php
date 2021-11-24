@@ -56,24 +56,25 @@ function menu()
 
 /**
  * Comprueba si la opción elegida esta dentro de las opciones válidas del menú.
- * @param int $opValida;
+ * @param int $opcionElegida;
  * @return int
  */
-function opcionValida($opValida)
+function seleccionarOpcion($opcionElegida)
 {
-    //boolean $numeroValido, int $opEvaluar
+    //boolean $numeroValido, int $opValida
     $numeroValido = false;
-    $opEvaluar = $opValida;
     do {
-        if ($opEvaluar < 8 && $opEvaluar > 0) {
+        if ($opcionElegida < 8 && $opcionElegida > 0) {
             $numeroValido = true;
-            sleep(1);
+            $opValida = $opcionElegida;
         } else {
             echo "La opcion seleccionada no existe porfavor ingresar un partida dentro del rango 1-7\n";
-            $opEvaluar = trim(fgets(STDIN));
+            menu();
+            echo "Seleccione una opcion del menu: ";
+            $opcionElegida = trim(fgets(STDIN));
         }
     } while ($numeroValido == false);
-    return $opEvaluar;
+    return $opValida;
 }
 
 /**
@@ -317,7 +318,8 @@ do {
     menu();
     echo "Seleccione una opcion del menu: ";
     $opcion = trim(fgets(STDIN));
-    //Uso de switch para llamar al módulo adecuado en las opciones 1 a 6, mostrar un cartel de despedida en la opción 7 y mostrar un error is no es ningún caso.
+    seleccionarOpcion($opcion);
+    //Uso de switch para llamar al módulo adecuado en las opciones 1 a 6, mostrar un cartel de despedida en la opción 7.
     switch ($opcion) {
         case 1:
             echo "\n\n\t◢=================◣\n";
@@ -325,7 +327,7 @@ do {
             echo "\t◥=================◤\n\n";
             sleep(1);
             $juegos[$i] = jugar();
-            imprimirResultado($juegos[$i]);
+            imprimirResultado($juegos[$i])  ;
             $i++;
             sleep(2);
             break;
