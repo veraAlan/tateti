@@ -318,7 +318,7 @@ do {
     menu();
     echo "Seleccione una opcion del menu: ";
     $opcion = trim(fgets(STDIN));
-    $opcion = seleccionarOpcion($opcion);
+    seleccionarOpcion($opcion);
     //Uso de switch para llamar al módulo adecuado en las opciones 1 a 6, mostrar un cartel de despedida en la opción 7.
     switch ($opcion) {
         case 1:
@@ -372,6 +372,9 @@ do {
             echo "\n◢ ===========================◣";
             echo "\n‖ Gracias por jugar a Tateti ‖";
             echo "\n◥ ===========================◤\n";
+            break;
+        default:
+            echo "La opcion seleccionada no existe porfavor ingresar un partida dentro del rango 1-7\n";
             break;
     }
 } while ($opcion != 7);
