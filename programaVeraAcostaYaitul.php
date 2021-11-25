@@ -238,7 +238,7 @@ function resumenJugador($coleccionJuegos)
             $jugadorEncontrado = true;
         } elseif (count($coleccionJuegos) == (array_search($partida, $coleccionJuegos) + 1)) {
             if ($jugadorEncontrado) {
-                echo "\n◿\n‖ Jugador: " . strtoupper($datosJugador["nombre"]) .
+                echo "\n◿\n‖ Jugador: " . ($datosJugador["nombre"]) .
                     "\n‖ Ganó: " . $datosJugador["juegosGanados"] . " juegos." .
                     "\n‖ Perdio: " . $datosJugador["juegosPerdidos"] . " juegos." .
                     "\n‖ Empato: " . $datosJugador["juegosEmpatados"] . " Juegos." .
