@@ -211,7 +211,6 @@ function resumenJugador($coleccionJuegos)
 
     foreach ($coleccionJuegos as &$partida) {
         if ($nombre == $partida["jugadorCruz"]) {
-            echo "\nJugador encontrado.";
             if ($partida["puntosCruz"] == 1) {
                 $datosJugador["juegosEmpatados"]++;
                 $datosJugador["puntosAcumulados"]++;
@@ -225,7 +224,6 @@ function resumenJugador($coleccionJuegos)
             }
             $jugadorEncontrado = true;
         } elseif ($nombre == $partida["jugadorCirculo"]) {
-            echo "\nJugador encontrado.";
             if ($partida["puntosCirculo"] == 1) {
                 $datosJugador["juegosEmpatados"]++;
                 $datosJugador["puntosAcumulados"]++;
