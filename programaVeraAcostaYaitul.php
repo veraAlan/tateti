@@ -424,7 +424,7 @@ do {
             echo "Ingrese el nombre del jugador el cual desee conocer su resumen de partidas: ";
             $nombre = trim(fgets(STDIN));
             $nombre = strtoupper($nombre);
-            if (jugadorEncontrado($coleccionJuegos, $nombre)) {
+            if (jugadorEncontrado($juegos, $nombre)) {
                 resumenJugador($juegos, $nombre);
             } else {
                 echo "El nombre ingresado no se encuentra en alguna partida.\n";
