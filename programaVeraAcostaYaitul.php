@@ -106,6 +106,7 @@ function seleccionarOpcion($opcionElegida)
  */
 function mostrarDatosJuego($coleccionJuegos, $numeroJuego)
 {
+    //array $datosJuego
     $datosJuego = $coleccionJuegos[$numeroJuego];
     echo "\n◿\n";
     echo "‖ Juego TATETI: " . ++$numeroJuego . " ";
@@ -131,6 +132,7 @@ function mostrarDatosJuego($coleccionJuegos, $numeroJuego)
  */
 function jugadorEncontrado($coleccion, $nombre)
 {
+    //boolean $jugadorExiste, int $indice
     $jugadorExiste = false;
     $indice = 0;
     while (!$jugadorExiste && $indice < count($coleccion)) {
@@ -163,7 +165,7 @@ function jugadorGano($partida, $jugador)
  */
 function buscarJugador($coleccionJuegos, $nombre)
 {
-    //int $numeroJuego, int $indice
+    //int $numeroJuego, int $indice, boolean $jugadorEncontrado
     $jugadorEncontrado = false;
     $indice = 0;
 
@@ -195,7 +197,7 @@ function buscarJugador($coleccionJuegos, $nombre)
  */
 function porcentajeDeVictorias($coleccionJuegos)
 {
-    //int $acumX, $acumO, array $partida, string $simbolo
+    //int $acumX, $acumO, array $partida, string $simbolo, boolean $bandera
     $acumX = 0;
     $acumO = 0;
     $bandera = true;
@@ -232,6 +234,7 @@ function porcentajeDeVictorias($coleccionJuegos)
  */
 function calcPorcentaje($victoriasX, $victoriasO, $simbolo)
 {
+    //int $porcVictorias
     if ($simbolo == "X") {
         $porcVictorias = round((($victoriasX * 100) / ($victoriasX + $victoriasO)), 2);
     } else {
@@ -350,7 +353,7 @@ function jugadoresOrdenados($coleccionJuegos)
 /**
  * int $i;
  * array $juegos;
- * string $opcion, $seleccion;
+ * string $opcion;
  */
 
 //Inicialización de variables:
@@ -435,7 +438,6 @@ do {
             echo "\t‖   Mostrar listado de juegos Ordenado por jugador O   ‖\n";
             echo "\t◥ =====================================================◤\n\n";
             sleep(1);
-            //TODO no me acuerdo que había que cambiar en este módulo.
             jugadoresOrdenados($juegos);
             break;
         case 7:
